@@ -1,0 +1,79 @@
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.App-header {
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.App-header h1 {
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.header-actions button {
+  padding: 8px 16px;
+  background-color: #61dafb;
+  color: #282c34;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.header-actions button:hover {
+  background-color: #4fa8c5;
+}
+
+.config-panel {
+  padding: 20px;
+  background-color: white;
+  border-bottom: 2px solid #ddd;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  flex: 1;
+}
+
+.status-card,
+.service-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.status-card h2,
+.service-card h3 {
+  margin-top: 0;
+  color: #282c34;
+}
+
+.service-card .error {
+  color: #d32f2f;
+  padding: 10px;
+  background-color: #ffebee;
+  border-radius: 4px;
+}
+
+.App-footer {
+  background-color: #282c34;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+}

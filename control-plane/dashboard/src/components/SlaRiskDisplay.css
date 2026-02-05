@@ -1,0 +1,50 @@
+.sla-risk-display {
+  margin: 15px 0;
+  padding: 15px;
+  background-color: #e3f2fd;
+  border-radius: 4px;
+}
+
+.sla-risk-display h4 {
+  margin: 0 0 10px 0;
+  color: #666;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.sla-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.sla-status.met {
+  color: #2e7d32;
+}
+
+.sla-status.violated {
+  color: #c62828;
+}
+
+.status-icon {
+  font-size: 20px;
+}
+
+.no-sla {
+  color: #666;
+  font-style: italic;
+}
+
+.sla-note {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #90caf9;
+}
+
+.sla-note small {
+  color: #666;
+  font-size: 12px;
+}

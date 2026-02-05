@@ -1,0 +1,49 @@
+.burn-rate-display {
+  margin: 15px 0;
+  padding: 15px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}
+
+.burn-rate-display h4 {
+  margin: 0 0 10px 0;
+  color: #666;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.burn-rate-value {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.burn-rate-value .value {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.burn-rate-value .value.critical {
+  color: #c62828;
+}
+
+.burn-rate-value .value.warning {
+  color: #ff9800;
+}
+
+.burn-rate-value .value.safe {
+  color: #2e7d32;
+}
+
+.burn-rate-value .description {
+  font-size: 14px;
+  color: #666;
+}
+
+.policy-info {
+  font-size: 14px;
+  color: #282c34;
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+}

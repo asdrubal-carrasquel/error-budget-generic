@@ -1,0 +1,50 @@
+.sli-display {
+  margin: 15px 0;
+}
+
+.sli-display h4 {
+  margin: 0 0 10px 0;
+  color: #666;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.sli-value {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+
+.sli-value .value {
+  font-size: 32px;
+  font-weight: bold;
+  color: #282c34;
+}
+
+.sli-value .target {
+  font-size: 16px;
+  color: #666;
+}
+
+.sli-value .target.met {
+  color: #2e7d32;
+}
+
+.sli-value .target.not-met {
+  color: #c62828;
+}
+
+.sli-status {
+  font-size: 14px;
+}
+
+.status-met {
+  color: #2e7d32;
+  font-weight: bold;
+}
+
+.status-not-met {
+  color: #c62828;
+  font-weight: bold;
+}

@@ -1,0 +1,31 @@
+.service-status {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.status-indicator {
+  font-size: 48px;
+}
+
+.status-text {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.status-🟢 {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-🟡 {
+  background-color: #fff3e0;
+  color: #e65100;
+}
+
+.status-🔴 {
+  background-color: #ffebee;
+  color: #c62828;
+}

@@ -1,0 +1,30 @@
+.error-budget-chart {
+  margin: 15px 0;
+}
+
+.error-budget-chart h4 {
+  margin: 0 0 10px 0;
+  color: #666;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.chart-container {
+  margin: 10px 0;
+}
+
+.budget-info {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.budget-value {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.budget-description {
+  font-size: 14px;
+  color: #666;
+}

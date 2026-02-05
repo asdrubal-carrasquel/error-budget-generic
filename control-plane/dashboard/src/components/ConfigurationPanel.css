@@ -1,0 +1,95 @@
+.configuration-panel {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ddd;
+}
+
+.tabs button {
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  font-size: 16px;
+  color: #666;
+}
+
+.tabs button:hover {
+  color: #282c34;
+}
+
+.tabs button.active {
+  color: #282c34;
+  border-bottom-color: #61dafb;
+  font-weight: bold;
+}
+
+.config-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.config-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-weight: 500;
+}
+
+.config-form input,
+.config-form textarea,
+.config-form select {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.config-form textarea {
+  font-family: monospace;
+  resize: vertical;
+}
+
+.config-form button {
+  padding: 10px 20px;
+  background-color: #61dafb;
+  color: #282c34;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.config-form button:hover:not(:disabled) {
+  background-color: #4fa8c5;
+}
+
+.config-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.message {
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.message.success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.message.error {
+  background-color: #ffebee;
+  color: #c62828;
+}

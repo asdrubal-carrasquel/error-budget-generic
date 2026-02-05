@@ -1,0 +1,119 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: error-budget-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: error_budget
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: error-budget-prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.enable-lifecycle'
+    ports:
+      - "9091:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    depends_on:
+      - mock-metrics-service
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:9090/-/healthy"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Mock Metrics Service (generates sample metrics)
+  mock-metrics-service:
+    build: ./mock-metrics-service
+    container_name: error-budget-mock-metrics
+    ports:
+      - "8084:8080"
+    environment:
+      ERROR_RATE: 0.01
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/metrics"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Evaluation Engine (.NET 8)
+  evaluation-engine:
+    build: ./evaluation-engine
+    container_name: error-budget-evaluation-engine
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - Prometheus__BaseUrl=http://prometheus:9090
+      - Prometheus__TimeoutSeconds=30
+    depends_on:
+      prometheus:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/api/evaluation/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # Control Plane (NestJS)
+  control-plane:
+    build: ./control-plane
+    container_name: error-budget-control-plane
+    ports:
+      - "3002:3000"
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - DB_DATABASE=error_budget
+      - EVALUATION_ENGINE_URL=http://evaluation-engine:8080
+      - PROMETHEUS_URL=http://prometheus:9090
+    depends_on:
+      postgres:
+        condition: service_healthy
+      evaluation-engine:
+        condition: service_healthy
+    volumes:
+      - ./control-plane/dashboard/build:/app/dashboard/build
+
+  # Grafana (optional, for advanced visualization)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: error-budget-grafana
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    depends_on:
+      - prometheus
+
+volumes:
+  postgres_data:
+  prometheus_data:
+  grafana_data:

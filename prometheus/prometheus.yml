@@ -1,0 +1,18 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    cluster: 'error-budget-demo'
+    environment: 'development'
+
+scrape_configs:
+  - job_name: 'mock-metrics-service'
+    static_configs:
+      - targets: ['mock-metrics-service:8080']
+    metrics_path: '/metrics'
+    scrape_interval: 5s
+
+  # Add more scrape configs here for real services
+  # - job_name: 'your-service'
+  #   static_configs:
+  #     - targets: ['your-service:8080']
